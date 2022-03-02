@@ -1,6 +1,7 @@
 # compactMediaPlayer
 
 - A interface for loading a thumbnail graphic/splash screen and playing a video file on button press (in loop).
+- As this is designed to run all day long, I suggest you boot the pi in terminal auto-login to save on memory(especially on pi zero2)
 
 Two step instruction for installation:
 
