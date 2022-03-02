@@ -19,7 +19,15 @@ echo "Skipping..."
 
 echo "Installing compactMediaPlayerScript"
 sudo wget -O /home/pi/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactMediaPlayer.py
-sudo chmod +x /home/pi/compactMediaPlayer.py
+
+echo "Giving full permissions to script..."
+sudo chmod a+r /home/pi/compactMediaPlayer.py
+sudo chmod a+w /home/pi/compactMediaPlayer.py
+sudo chmod a+x /home/pi/compactMediaPlayer.py
+sudo chmod a+X /home/pi/compactMediaPlayer.py
+echo "Permissions set."
+
+
 echo "Installing default thumbnail, video and audio files"
 echo "1/3: Thumbnail..."
 sudo wget -O /home/pi/thumbnail.jpg https://github.com/FifeXLtd/compactMediaPlayer/blob/dc1274a77cee455c1d60bc03b60c6e6dff0592b3/thumbnail.jpg
