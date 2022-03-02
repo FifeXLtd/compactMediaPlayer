@@ -28,6 +28,6 @@ echo "3/3: Audio..."
 sudo wget -O /home/pi/audio.mp3 https://github.com/FifeXLtd/compactMediaPlayer/blob/dc1274a77cee455c1d60bc03b60c6e6dff0592b3/audio.mp3
 echo "Default files downloaded successfully to '/home/pi/'"
 echo "Automatating script on boot"
-sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo /usr/local/bin/compactMediaPlayer.py &\n' /etc/rc.local
+sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo python3 /usr/local/bin/compactMediaPlayer.py &\n' /etc/rc.local
 
 
