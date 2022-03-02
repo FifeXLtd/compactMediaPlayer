@@ -6,11 +6,11 @@ Two step instruction for installation:
 
 1 - Copy install.sh, video.mp4, thumbnail.jpg & audio.mp3 onto a removable drive and paste inside the home directory of a Raspberry Pi (/home/pi/). Remove drive when you are done.
 
-2 - enter the following with a terminal window:
-sudo chmod +x /home/pi/install.sh       
-sudo /home/pi/install.sh 
+2 - Enter the following with a terminal window:
 
-
+    sudo chmod +x /home/pi/install.sh       
+    
+    sudo /home/pi/install.sh 
 
 The Raspberry Pi will now reboot, loading the default files from step one. 
 
