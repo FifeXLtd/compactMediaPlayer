@@ -27,16 +27,6 @@ sudo chmod a+x /home/pi/compactMediaPlayer.py
 sudo chmod a+X /home/pi/compactMediaPlayer.py
 echo "Permissions set."
 
-
-echo "Installing default thumbnail, video and audio files"
-echo "1/3: Thumbnail..."
-sudo wget -O /home/pi/thumbnail.jpg https://github.com/FifeXLtd/compactMediaPlayer/blob/dc1274a77cee455c1d60bc03b60c6e6dff0592b3/thumbnail.jpg
-echo "2/3: Video..."
-sudo wget -O /home/pi/video.mp4 https://github.com/FifeXLtd/compactMediaPlayer/blob/dc1274a77cee455c1d60bc03b60c6e6dff0592b3/video.mp4
-echo "3/3: Audio..."
-sudo wget -O /home/pi/audio.mp3 https://github.com/FifeXLtd/compactMediaPlayer/blob/dc1274a77cee455c1d60bc03b60c6e6dff0592b3/audio.mp3
-echo "Default files downloaded successfully to '/home/pi/'"
-
 echo "Installing zram"
 sudo wget -q https://git.io/vM1kx -O /tmp/rpizram && bash /tmp/rpizram
 
