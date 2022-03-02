@@ -13,7 +13,6 @@ echo "Skipping..."
 echo "5/7: 'subprocess'"
 echo "Skipping..."
 echo "6/7: 'glob'"
-sudo pip install glob
 echo "Skipping..."
-sudo pip install os
+echo "7/7: 'os'"
 echo "Skipping..."
