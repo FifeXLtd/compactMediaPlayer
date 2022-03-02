@@ -11,8 +11,9 @@ sudo pip install screeninfo
 echo "4/7: RPI.GPIO"
 echo "Skipping..."
 echo "5/7: 'subprocess'"
-sudo pip install subprocess
+echo "Skipping..."
 echo "6/7: 'glob'"
 sudo pip install glob
-echo "7/7: 'os'"
+echo "Skipping..."
 sudo pip install os
+echo "Skipping..."
