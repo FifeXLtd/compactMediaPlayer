@@ -17,4 +17,4 @@ echo "Skipping..."
 echo "7/7: 'os'"
 echo "Skipping..."
 
-sudo wget -O /usr/local/bin/compactVideoPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactVideoPlayer/main/compactVideoPlayer.py
+sudo wget -O /usr/local/bin/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactMediaPlayer.py
