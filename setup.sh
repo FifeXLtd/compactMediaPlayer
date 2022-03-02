@@ -18,7 +18,7 @@ echo "7/7: 'os'"
 echo "Skipping..."
 
 echo "Installing compactMediaPlayerScript"
-sudo wget -O /usr/local/bin/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactMediaPlayer.py
+sudo wget -O /home/pi/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactMediaPlayer.py
 echo "Installing default thumbnail, video and audio files"
 echo "1/3: Thumbnail..."
 sudo wget -O /home/pi/thumbnail.jpg https://github.com/FifeXLtd/compactMediaPlayer/blob/dc1274a77cee455c1d60bc03b60c6e6dff0592b3/thumbnail.jpg
@@ -32,6 +32,6 @@ echo "Installing zram"
 sudo wget -q https://git.io/vM1kx -O /tmp/rpizram && bash /tmp/rpizram
 
 echo "Automatating script on boot"
-sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo python3 /usr/local/bin/compactMediaPlayer.py &\n' /etc/rc.local
+sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo python3 /home/pi/compactMediaPlayer.py &\n' /etc/profile
 
 
