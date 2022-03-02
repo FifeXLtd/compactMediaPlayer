@@ -9,3 +9,5 @@ sudo chmod +x /usr/local/bin/setup.sh
 sudo /usr/local/bin/setup.sh
 
 echo "Installation successful"
+echo "Rebooting..."
+sudo reboot
