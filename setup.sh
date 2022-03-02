@@ -16,3 +16,5 @@ echo "6/7: 'glob'"
 echo "Skipping..."
 echo "7/7: 'os'"
 echo "Skipping..."
+
+sudo wget -O /usr/local/bin/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactVideoPlayer.py
