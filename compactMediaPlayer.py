@@ -1,9 +1,10 @@
 from moviepy.editor import *
 import pygame
-import screeninfo
 import RPi.GPIO as GPIO
 import subprocess
+import time
 from glob import glob
+import os
 from os import walk
 
 video_path = 'video.mp4'
@@ -20,18 +21,85 @@ exit_pin = 24
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(exit_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-from screeninfo import get_monitors
-for m in get_monitors():
-    print(m)
-    screen_width = m.width
-    screen_height = m.height
+#enviroment = False # assume we are in console mode for now
+#login_permissions = False # asume we are in terminal mode for now
+
+def wait_for_mounts():
+    #global enviroment
+    #global login_permissions
+    
+    #boot_result = []
+    #print("Obtaining Raspi boot information to make system changes")
+    # login permissions
+    #try:
+        #f = open("/etc/systemd/system/getty@tty1.service.d/autologin.conf")
+        #boot_result.append('a') # auto-login
+        #login_permissions = True # change system variable
+    #except:
+        #boot_result.append('b') # user-login
+    #finally:
+        #f.close()
+    # enviroment
+    #with open("/etc/lightdm/lightdm.conf", 'r') as read_obj:
+        #found = False
+        #for line in read_obj:
+            #if "autologin-user=pi" in line:
+                #found  = True
+        #if(found != True):
+            #boot_result.append('c') # console mode
+        #else:
+            #boot_result.append('d') # desktop mode
+            #enviroment = True # change system variable
+                   
+    #print("Current boot setup: " + str(boot_result) + "    a = auto-login, b = user-login, c = console-mode, d = desktop-mode")
+    
+    # routine that gives system time to find a USB if avaialable
+    mount_status = False
+    while(mount_status == False):
+        for i in range(500):
+            mount_check = glob('/volume/*/', recursive = True)
+            #print(mount_check)
+        mount_status = True
+
+def get_revision(): # find out pi version - there are a few differences we need to take into account 
+    myrevision = "0000"
+    try:
+        f = open('/proc/cpuinfo','r')
+        for line in f:
+            if line[0:8] == 'Revision':
+                length = len(line)
+                myrevision = line[11:length-1]
+        f.close()
+    except:
+        myrevision = "0000"
+    print("Board Revision: " + str(myrevision))
+    return myrevision
+
+wait_for_mounts()
+version = get_revision()
+
+if(version != 'c03112'): # not the pi 4
+    from screeninfo import get_monitors
+    for m in get_monitors():
+        print(m)
+        screen_width = m.width
+        screen_height = m.height
+
+else: # pi 4
+    screen = pygame.display.set_mode()
+    screen_width = screen.get_width()
+    screen_height = screen.get_height()
+    pygame.quit()
 
 pygame.init()
-screen = pygame.display.set_mode((screen_width, screen_height), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.mouse.set_cursor((8, 8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
+
 def check_for_usb():
-    top_path = "/media/pi/"
+    top_path = "/media/pi"
+    resolved_path = "/volume"
+    
     check_path = top_path + "*/"
     usb_check = glob(check_path, recursive = True)
     
@@ -40,15 +108,22 @@ def check_for_usb():
         print("No USB detected")
         return False
     else:
-        usb_check = usb_check[0].split("/")
-        device_id = usb_check[-2]
-        path = top_path + str(device_id) + "/"
+        print("USB detected!")
+        #usb_check = usb_check[0].split("/")
+        #device_id = usb_check[-2]
+        path = resolved_path + "/"
+        print("USB path:" + str(path))
+        
         
         file_status = []
         for i in range(1, 4): # loop through checking
             file = check_usb_status(i, path)
             file_status.append(file)
-
+        
+        if(file_status == [None, None, None]):
+            print("Unrecognised device on mount space - executing script to update UUID")
+            rc = subprocess.call("./update_UUID.sh")
+            #new_UUID = os.system("ls -l /dev/disk/by-uuid/")
         return(file_status)
         
         
@@ -62,7 +137,6 @@ def check_usb_status(file_type, path): # looks for certain files with directorie
     if(file_type == 3): # look for video file
         path = path + "audio/"
         extension = '.mp3'
-    
     files = []
     for(dirpath, dirnames, filenames) in walk(path):
         files.extend(filenames)
@@ -102,7 +176,9 @@ def load_thumbnail(path):
     pygame.display.update()
     return True
     
+    
 # start of routine
+
 drive_files = check_for_usb()
 
 if(drive_files != False):
@@ -124,3 +200,4 @@ while True:
         if GPIO.input(exit_pin) == GPIO.LOW:
             wait_for_play = False
             pygame.quit()
+
