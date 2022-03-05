@@ -18,19 +18,28 @@ echo "7/7: 'os'"
 echo "Skipping..."
 
 echo "Installing compactMediaPlayerScript"
-sudo wget -O /home/pi/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactMediaPlayer.py
+sudo mkdir /usr/local/bin/compactMediaPlayer
+sudo wget -O /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactMediaPlayer.py
+
+echo "Installing contributing scripts"
+sudo wget -O /usr/local/bin/compactMediaPlayer/update_UUID.sh https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/update_UUID.sh
+
+echo "Creating default mount point"
+sudo mkdir /cmpVol                                        # creates directory
+sudo chown -R pi:pi /cmpVol  
+sudo sed '1 i UUID=PLACE_HOLDER /volume vfat defaults,auto,users,rw,nofail,noatime 0 0' /etc/fstab
 
 echo "Giving full permissions to script..."
-sudo chmod a+r /home/pi/compactMediaPlayer.py
-sudo chmod a+w /home/pi/compactMediaPlayer.py
-sudo chmod a+x /home/pi/compactMediaPlayer.py
-sudo chmod a+X /home/pi/compactMediaPlayer.py
+sudo chmod a+r /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py
+sudo chmod a+w /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py
+sudo chmod a+x /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py
+sudo chmod a+X /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py
 echo "Permissions set."
 
 echo "Installing zram"
 sudo wget -q https://git.io/vM1kx -O /tmp/rpizram && bash /tmp/rpizram
 
 echo "Automatating script on boot"
-sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo python3 /home/pi/compactMediaPlayer.py &\n' /etc/profile
+sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo python3 /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py &\n' /etc/profile
 
 
