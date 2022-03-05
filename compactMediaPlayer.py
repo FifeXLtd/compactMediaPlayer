@@ -122,7 +122,7 @@ def check_for_usb():
         
         if(file_status == [None, None, None]):
             print("Unrecognised device on mount space - executing script to update UUID")
-            rc = subprocess.call("./update_UUID.sh")
+            rc = subprocess.call("/usr/local/bin/compactMediaPlayer/update_UUID.sh") 
             #new_UUID = os.system("ls -l /dev/disk/by-uuid/")
         return(file_status)
         
