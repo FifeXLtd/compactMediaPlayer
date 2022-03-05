@@ -22,8 +22,8 @@ sudo mkdir /usr/local/bin/compactMediaPlayer
 sudo wget -O /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/compactMediaPlayer.py
 
 echo "Installing contributing scripts"
-sudo wget -O /usr/local/bin/compactMediaPlayer/update_UUID.sh https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/update_UUID.sh
-sudo chmod +x /usr/local/bin/compactMediaPlayer/setup.sh # give permissions 
+sudo wget -O /home/pi/update_UUID.sh https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/update_UUID.sh
+sudo chmod +x /home/pi/setup.sh # give permissions 
 
 echo "Creating default mount point"
 sudo mkdir /cmpVol                                        # creates directory
