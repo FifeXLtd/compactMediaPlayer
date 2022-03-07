@@ -24,7 +24,7 @@ sudo sed -i '2 c '"$new_line"'' /etc/fstab
 
 echo "Remounting complete"
 echo "Rebooting system..."
-sudo reboot
+#sudo reboot
 
 
 
