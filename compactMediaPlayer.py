@@ -21,38 +21,7 @@ exit_pin = 24
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(exit_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-#enviroment = False # assume we are in console mode for now
-#login_permissions = False # asume we are in terminal mode for now
-
 def wait_for_mounts():
-    #global enviroment
-    #global login_permissions
-    
-    #boot_result = []
-    #print("Obtaining Raspi boot information to make system changes")
-    # login permissions
-    #try:
-        #f = open("/etc/systemd/system/getty@tty1.service.d/autologin.conf")
-        #boot_result.append('a') # auto-login
-        #login_permissions = True # change system variable
-    #except:
-        #boot_result.append('b') # user-login
-    #finally:
-        #f.close()
-    # enviroment
-    #with open("/etc/lightdm/lightdm.conf", 'r') as read_obj:
-        #found = False
-        #for line in read_obj:
-            #if "autologin-user=pi" in line:
-                #found  = True
-        #if(found != True):
-            #boot_result.append('c') # console mode
-        #else:
-            #boot_result.append('d') # desktop mode
-            #enviroment = True # change system variable
-                   
-    #print("Current boot setup: " + str(boot_result) + "    a = auto-login, b = user-login, c = console-mode, d = desktop-mode")
-    
     # routine that gives system time to find a USB if avaialable
     mount_status = False
     while(mount_status == False):
@@ -148,26 +117,28 @@ def check_usb_status(file_type, path): # looks for certain files with directorie
    
 def check_for_audio(path):
     global embeddedAudio
-    result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
-                             "format=nb_streams", "-of",
-                             "default=noprint_wrappers=1:nokey=1", path],
-                            stdout = subprocess.PIPE,
-                            stderr=subprocess.STDOUT)
-    no_streams = (int(result.stdout) -1)
-    if(no_streams == 1): # 1 stream = video WITHOUT audio
-        embeddedAudio = False # overwrite global
-    # anything else we can leave exactly the same
+    
+    print("Looking for embedded audio at: " + str(path))
+    
+    try:
+        audio = VideoFileClip(path)
+        audio.audio.write_audiofile('/home/pi/audioFile.mp3')
+    except:
+        print("No audio to extract")
+        embeddedAudio = False
 
 def play_video(path):
     global embeddedAudio
     
     clip = VideoFileClip(path).resize((screen_width, screen_height))
     if(embeddedAudio != True):
+        print("No audio detected, attaching sound source")
         audioclip = AudioFileClip(audio_path)
         newClip = clip.set_audio(audioclip)
-        newClip.preview(fullscreen = True)
+        newClip.preview(fullscreen = False)
     else:
-        clip.preview(fullscreen = True)
+        print("Audio embedded, playing default")
+        clip.preview(fullscreen = False)
      
 def load_thumbnail(path):
     image = pygame.image.load(path).convert()
@@ -175,8 +146,7 @@ def load_thumbnail(path):
     screen.blit(image, (0, 0))
     pygame.display.update()
     return True
-    
-    
+     
 # start of routine
 
 drive_files = check_for_usb()
@@ -200,4 +170,5 @@ while True:
         if GPIO.input(exit_pin) == GPIO.LOW:
             wait_for_play = False
             pygame.quit()
+
 
