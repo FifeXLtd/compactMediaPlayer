@@ -26,7 +26,7 @@ def wait_for_mounts():
     mount_status = False
     while(mount_status == False):
         for i in range(500):
-            mount_check = glob('/volume/*/', recursive = True)
+            mount_check = glob('/cmpVol/*/', recursive = True)
             #print(mount_check)
         mount_status = True
 
