@@ -66,8 +66,8 @@ pygame.mouse.set_cursor((8, 8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
 
 def check_for_usb():
-    top_path = "/media/pi"
-    resolved_path = "/volume"
+    top_path = "/cmpVol"
+    resolved_path = "/cmpVol"
     
     check_path = top_path + "*/"
     usb_check = glob(check_path, recursive = True)
