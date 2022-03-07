@@ -43,4 +43,6 @@ sudo wget -q https://git.io/vM1kx -O /tmp/rpizram && bash /tmp/rpizram
 echo "Automatating script on boot"
 sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo python3 /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py &\n' /etc/profile
 
+#sudo reboot
+
 
