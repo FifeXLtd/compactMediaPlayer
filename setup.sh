@@ -28,7 +28,6 @@ sudo chmod +x /home/pi/update_UUID.sh # give permissions
 echo "Creating default mount point"
 sudo mkdir /volume                                       # creates directory
 sudo chown -R pi:pi /volume  
-sudo sed '1 i UUID=PLACE_HOLDER /volume vfat defaults,auto,users,rw,nofail,noatime 0 0' /etc/fstab
 
 echo "Giving full permissions to script..."
 sudo chmod a+r /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py
