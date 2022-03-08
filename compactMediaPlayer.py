@@ -122,7 +122,7 @@ def check_for_audio(path):
     
     try:
         audio = VideoFileClip(path)
-        audio.audio.write_audiofile('/home/pi/audioFile.mp3')
+        audio.audio.write_audiofile('/home/pi/audio_holder.mp3')
     except:
         print("No audio to extract")
         embeddedAudio = False
@@ -131,14 +131,13 @@ def play_video(path):
     global embeddedAudio
     
     clip = VideoFileClip(path).resize((screen_width, screen_height))
-    if(embeddedAudio != True):
+    if(embeddedAudio == True):
         print("No audio detected, attaching sound source")
-        audioclip = AudioFileClip(audio_path)
-        newClip = clip.set_audio(audioclip)
-        newClip.preview(fullscreen = False)
+        audioclip = AudioFileClip('home/pi/audio_holder')
     else:
-        print("Audio embedded, playing default")
-        clip.preview(fullscreen = False)
+        audioclip = AudioFileClip(audio_path)
+    newClip = clip.set_audio(audioclip)
+    newClip.preview(fullscreen = True)
      
 def load_thumbnail(path):
     image = pygame.image.load(path).convert()
