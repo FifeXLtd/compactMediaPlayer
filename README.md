@@ -13,7 +13,7 @@ Two step instruction for installation:
      sudo chown -R pi:pi /volume  # give full permissions to directory 
      
      sudo nano /etc/fstab # open mount file
-     # create a new line and add the following: 
+     # create a new line on below the first line and add the following: 
      UUID=PLACE_HOLDER /cmpVol vfat defaults,auto,users,rw,nofail,noatime 0 0
     
 3 - Reboot the pi and ensure there is a new empty directory named /volume
