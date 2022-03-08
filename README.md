@@ -7,6 +7,8 @@ Two step instruction for installation:
 
 2 - Enter the following 3 lines within a terminal window:
 
+FIRST ENSURE YOU HAVE AN INTERNET CONNECTION
+
     sudo chmod +x /home/pi/install.sh       
     sudo /usr/local/bin/install.sh 
     # the script will reboot system once everything has complete
