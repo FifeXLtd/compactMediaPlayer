@@ -23,12 +23,12 @@ sudo wget -O /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py https://raw
 
 echo "Installing contributing scripts"
 sudo wget -O /home/pi/update_UUID.sh https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/update_UUID.sh
-sudo chmod +x /home/pi/update_UUID.sh # give permissions 
+sudo chmod +x /home/pi/setup.sh # give permissions 
 
-#echo "Creating default mount point"
-#sudo mkdir /cmpVol                                        # creates directory
-#sudo chown -R pi:pi /cmpVol  
-#sudo sed '1 i UUID=PLACE_HOLDER /cmpVol vfat defaults,auto,users,rw,nofail,noatime 0 0' /etc/fstab
+echo "Creating default mount point"
+sudo mkdir /cmpVol                                        # creates directory
+sudo chown -R pi:pi /cmpVol  
+sudo sed '1 i UUID=PLACE_HOLDER /volume vfat defaults,auto,users,rw,nofail,noatime 0 0' /etc/fstab
 
 echo "Giving full permissions to script..."
 sudo chmod a+r /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py
@@ -42,7 +42,4 @@ sudo wget -q https://git.io/vM1kx -O /tmp/rpizram && bash /tmp/rpizram
 
 echo "Automatating script on boot"
 sudo sed -i -e '$i # added for compactMediaPlayer by Ben Morris\nsudo python3 /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py &\n' /etc/profile
-
-sudo reboot
-
 
