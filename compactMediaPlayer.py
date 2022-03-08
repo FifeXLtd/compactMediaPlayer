@@ -26,7 +26,7 @@ def wait_for_mounts():
     mount_status = False
     while(mount_status == False):
         for i in range(500):
-            mount_check = glob('/cmpVol/*/', recursive = True)
+            mount_check = glob('/volume/*/', recursive = True)
             #print(mount_check)
         mount_status = True
 
@@ -67,7 +67,7 @@ pygame.mouse.set_cursor((8, 8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
 def check_for_usb():
     top_path = "/media/pi/"
-    resolved_path = "/cmpVol"
+    resolved_path = "/volume"
     
     check_path = top_path + "*/"
     usb_check = glob(check_path, recursive = True)
