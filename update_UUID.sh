@@ -28,5 +28,3 @@ sudo reboot
 
 
 
-
-
