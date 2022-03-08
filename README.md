@@ -12,7 +12,7 @@ FIRST ENSURE YOU HAVE AN INTERNET CONNECTION
     sudo chmod +x /home/pi/install.sh       
     sudo /usr/local/bin/install.sh 
     # the script will reboot system once everything has complete
-    sudo mv install.sh /usr/local/bin # move install script to bin directory as it is no longer needed
+    sudo mv install.sh /home/pi/bin # move install script to bin directory as it is no longer needed
 The Raspberry Pi will now reboot, loading the default files from step one.
 
 Attach a button to GPIO 17 to start video play, and use GPIO 24 to exit (you can only exit in thumbnail mode).
