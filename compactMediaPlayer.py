@@ -7,9 +7,9 @@ from glob import glob
 import os
 from os import walk
 
-video_path = 'video.mp4'
-thumbnail_path = 'thumbnail.jpg'
-audio_path = 'audio.mp3'
+video_path = '/home/pi/video.mp4'
+thumbnail_path = '/home/pi/thumbnail.jpg'
+audio_path = '/home/pi/audio.mp3'
 
 embeddedAudio = True # assume the video file has audio for now
 
@@ -21,39 +21,7 @@ exit_pin = 24
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(exit_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-#enviroment = False # assume we are in console mode for now
-#login_permissions = False # asume we are in terminal mode for now
-
 def wait_for_mounts():
-    #global enviroment
-    #global login_permissions
-    
-    #boot_result = []
-    #print("Obtaining Raspi boot information to make system changes")
-    # login permissions
-    #try:
-        #f = open("/etc/systemd/system/getty@tty1.service.d/autologin.conf")
-        #boot_result.append('a') # auto-login
-        #login_permissions = True # change system variable
-    #except:
-        #boot_result.append('b') # user-login
-    #finally:
-        #f.close()
-    # enviroment
-    #with open("/etc/lightdm/lightdm.conf", 'r') as read_obj:
-        #found = False
-        #for line in read_obj:
-            #if "autologin-user=pi" in line:
-                #found  = True
-        #if(found != True):
-            #boot_result.append('c') # console mode
-        #else:
-            #boot_result.append('d') # desktop mode
-            #enviroment = True # change system variable
-                   
-    #print("Current boot setup: " + str(boot_result) + "    a = auto-login, b = user-login, c = console-mode, d = desktop-mode")
-    
-    # routine that gives system time to find a USB if avaialable
     mount_status = False
     while(mount_status == False):
         for i in range(500):
@@ -100,25 +68,32 @@ def check_for_usb():
     top_path = "/media/pi"
     resolved_path = "/volume"
     
+    USB_stat = 0 # assume there is no connected USB
+    try:
+        output = subprocess.check_output("sudo blkid -s UUID -o value /dev/sda1", shell=True)
+        print("Output: " + str(output))
+        USB_stat = 1 # overwrite variable and declare there is a USB
+    except:
+        print("No connected USB")
+   
     check_path = top_path + "*/"
     usb_check = glob(check_path, recursive = True)
-    
     no_usb_devices = len(usb_check)
-    if(no_usb_devices == 0):
+    
+    if(USB_stat == 0):
         print("No USB detected")
+        print("Loading media from home directory")
         return False
     else:
         print("USB detected!")
-        #usb_check = usb_check[0].split("/")
-        #device_id = usb_check[-2]
         path = resolved_path + "/"
         print("USB path:" + str(path))
-        
         
         file_status = []
         for i in range(1, 4): # loop through checking
             file = check_usb_status(i, path)
             file_status.append(file)
+        print(file_status)
         
         if(file_status == [None, None, None]):
             print("Unrecognised device on mount space - executing script to update UUID")
@@ -188,7 +163,7 @@ if(drive_files != False):
         thumbnail_path = drive_files[1]
     if(drive_files[2] != None): # video
         audio_path = drive_files[2]   
-#print(video_path, thumbnail_path, audio_path) 
+print(video_path, thumbnail_path, audio_path) 
  
 check_for_audio(video_path) # determine if the video has embedded audio      
 while True:
