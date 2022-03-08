@@ -157,7 +157,7 @@ if(drive_files != False):
         thumbnail_path = drive_files[1]
     if(drive_files[2] != None): # video
         audio_path = drive_files[2]   
-#print(video_path, thumbnail_path, audio_path) 
+print(video_path, thumbnail_path, audio_path) 
  
 check_for_audio(video_path) # determine if the video has embedded audio      
 while True:
