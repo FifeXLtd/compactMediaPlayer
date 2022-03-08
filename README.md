@@ -3,7 +3,9 @@ A interface for loading a thumbnail graphic/splash screen and playing a video fi
 As this is designed to run all day long, I suggest you boot the pi in terminal auto-login to save on memory(especially on pi zero2)
 Two step instruction for installation:
 
-1 - Copy install.sh, video.mp4, thumbnail.jpg & audio.mp3 onto a removable drive and paste inside the home directory of a Raspberry Pi (/home/pi/). Remove drive when you are done.
+1 - Copy install.txt, video.mp4, thumbnail.jpg & audio.mp3 onto a removable drive and paste inside the home directory of a Raspberry Pi (/home/pi/). Remove drive when you are done.
+
+Next, create a new file within the home directory named install.sh and paste the contents of 'install.txt' into it. Delete install.txt once this is done.
 
 2 - Enter the following 3 lines within a terminal window:
 
@@ -13,12 +15,11 @@ FIRST ENSURE YOU HAVE AN INTERNET CONNECTION
     UUID=PLACE_HOLDER /volume vfat defaults,auto,users,rw,nofail,noatime 0 0
     
     # next we can install 
-    sudo chmod +x /home/pi/install.sh       
-    sudo /home/pi/install.sh 
+    sudo chmod +x /home/pi/install.sh   # give permissions
+    sudo /home/pi/install.sh   # execute script
     # the script will reboot system once everything has complete
     
-
-The Raspberry Pi will now reboot, loading the default files from step one.
+The Raspberry Pi will now reboot. Please keep in my if you have a USB attached, it will reboot twice so please be patient. 
 
 Attach a button to GPIO 17 to start video play, and use GPIO 24 to exit (you can only exit in thumbnail mode).
 
