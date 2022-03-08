@@ -14,14 +14,14 @@ Two step instruction for installation:
      
      sudo nano /etc/fstab # open mount file
      # create a new line on below the first line and add the following: 
-     UUID=PLACE_HOLDER /cmpVol vfat defaults,auto,users,rw,nofail,noatime 0 0
+     UUID=PLACE_HOLDER /volume vfat defaults,auto,users,rw,nofail,noatime 0 0
     
 3 - Reboot the pi and ensure there is a new empty directory named /volume
     
 4 - Execute the install script [PLEASE ENSURE YOU ARE CONNECTED TO THE INTERNET TO ACCESS GITHUB]
 
     sudo chmod +x /home/pi/install.sh  # give permission to .sh    
-    sudo /usr/local/bin/install.sh # execute .sh
+    sudo /home/pi/install.sh # execute .sh
  
 The Raspberry Pi will now reboot, loading the default files from step one. 
 
