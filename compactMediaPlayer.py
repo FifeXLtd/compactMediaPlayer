@@ -133,7 +133,7 @@ def play_video(path):
     clip = VideoFileClip(path).resize((screen_width, screen_height))
     if(embeddedAudio == True):
         print("No audio detected, attaching sound source")
-        audioclip = AudioFileClip('home/pi/audio_holder')
+        audioclip = AudioFileClip('/home/pi/audio_holder')
     else:
         audioclip = AudioFileClip(audio_path)
     newClip = clip.set_audio(audioclip)
