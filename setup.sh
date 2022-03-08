@@ -25,10 +25,10 @@ echo "Installing contributing scripts"
 sudo wget -O /home/pi/update_UUID.sh https://raw.githubusercontent.com/FifeXLtd/compactMediaPlayer/main/update_UUID.sh
 sudo chmod +x /home/pi/update_UUID.sh # give permissions 
 
-echo "Creating default mount point"
-sudo mkdir /cmpVol                                        # creates directory
-sudo chown -R pi:pi /cmpVol  
-sudo sed '1 i UUID=PLACE_HOLDER /cmpVol vfat defaults,auto,users,rw,nofail,noatime 0 0' /etc/fstab
+#echo "Creating default mount point"
+#sudo mkdir /cmpVol                                        # creates directory
+#sudo chown -R pi:pi /cmpVol  
+#sudo sed '1 i UUID=PLACE_HOLDER /cmpVol vfat defaults,auto,users,rw,nofail,noatime 0 0' /etc/fstab
 
 echo "Giving full permissions to script..."
 sudo chmod a+r /usr/local/bin/compactMediaPlayer/compactMediaPlayer.py
