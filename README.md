@@ -7,14 +7,22 @@ Two step instruction for installation:
 
 1 - Copy install.sh, video.mp4, thumbnail.jpg & audio.mp3 onto a removable drive and paste inside the home directory of a Raspberry Pi (/home/pi/). Remove drive when you are done.
 
-2 - Enter the following 3 lines within a terminal window:
-     
+2 - Create a mount point for future removable drives 
     
-    sudo chmod +x /home/pi/install.sh       
-    sudo /usr/local/bin/install.sh 
-    # the script will reboot system once everything has complete
-    sudo mv install.sh /usr/local/bin # move install script to bin directory as it is no longer needed
+     sudo mkdir /volume   # creates directory for mount
+     sudo chown -R pi:pi /volume  # give full permissions to directory 
+     
+     sudo nano /etc/fstab # open mount file
+     # create a new line and add the following: 
+     UUID=PLACE_HOLDER /cmpVol vfat defaults,auto,users,rw,nofail,noatime 0 0
+    
+3 - Reboot the pi and ensure there is a new empty directory named /volume
+    
+4 - Execute the install script [PLEASE ENSURE YOU ARE CONNECTED TO THE INTERNET TO ACCESS GITHUB]
 
+    sudo chmod +x /home/pi/install.sh  # give permission to .sh    
+    sudo /usr/local/bin/install.sh # execute .sh
+ 
 The Raspberry Pi will now reboot, loading the default files from step one. 
 
 Attach a button to GPIO 17 to start video play, and use GPIO 24 to exit (you can only exit in thumbnail mode).
