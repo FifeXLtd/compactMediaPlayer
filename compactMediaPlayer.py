@@ -7,9 +7,9 @@ from glob import glob
 import os
 from os import walk
 
-video_path = 'home/pi/video.mp4'
-thumbnail_path = 'home/pi/thumbnail.jpg'
-audio_path = 'home/pi/audio.mp3'
+video_path = '/home/pi/video.mp4'
+thumbnail_path = '/home/pi/thumbnail.jpg'
+audio_path = '/home/pi/audio.mp3'
 
 embeddedAudio = True # assume the video file has audio for now
 
