@@ -16,7 +16,7 @@ echo New USB UUID found: $new_UUID
 old_line=$(grep -r $old_UUID /etc/fstab)
 
 a="UUID=${new_UUID}"
-b="/cmpVol vfat defaults,auto,users,rw,nofail,noatime 0 0"
+b="/volume vfat defaults,auto,users,rw,nofail,noatime 0 0"
 new_line="${a} ${b}"
 echo "updated: ${new_line}"
 
