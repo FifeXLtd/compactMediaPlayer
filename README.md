@@ -14,7 +14,7 @@ FIRST ENSURE YOU HAVE AN INTERNET CONNECTION
     
     # next we can install 
     sudo chmod +x /home/pi/install.sh       
-    sudo /usr/local/bin/install.sh 
+    sudo /home/pi/install.sh 
     # the script will reboot system once everything has complete
     
 
