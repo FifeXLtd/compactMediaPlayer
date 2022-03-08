@@ -20,14 +20,15 @@ For installation I suggest you start with a clean flash of an existing Raspberry
 
 Next, create a new file within the home directory named install.sh and paste the contents of 'install.txt' into it. Delete install.txt once this is done.
 
-2 - Enter the following 3 lines within a terminal window:
+2 - Enter the following lines within a terminal window:
 
 FIRST ENSURE YOU HAVE AN INTERNET CONNECTION
 
-    # add next line under the first line and add:
+    sudo nano /etc/fstab # open fstab for editing
+    # add the follwowing new line under the first line:
     UUID=PLACE_HOLDER /volume vfat defaults,auto,users,rw,nofail,noatime 0 0
     
-    # next we can install 
+    # next we can install packages
     sudo chmod +x /home/pi/install.sh   # give permissions
     sudo /home/pi/install.sh   # execute script
     # the script will reboot system once everything has complete
