@@ -1,7 +1,20 @@
 compactMediaPlayer
+
 A interface for loading a thumbnail graphic/splash screen and playing a video file on button press (in loop).
+
 As this is designed to run all day long, I suggest you boot the pi in terminal auto-login to save on memory(especially on pi zero2)
 Two step instruction for installation:
+
+compactMediaPlayer will encounter 3 different situations:
+    
+    1 - There is no USB connected: this will load the default files from the home directory
+    2 - There is a USB connected, but it is unregistered(new): this will go detected and a system remount will occur forcing a reboot
+    3 - There is a USB connected, and it is registered: this will load the USB files on boot no problem.
+    
+For installation I suggest you start with a clean flash of an existing Raspberry Pi OS. I used the 1.1GB RPI legacy (with desktop enviroment).
+
+
+[INSTALLATION]
 
 1 - Copy install.txt, video.mp4, thumbnail.jpg & audio.mp3 onto a removable drive and paste inside the home directory of a Raspberry Pi (/home/pi/). Remove drive when you are done.
 
@@ -19,7 +32,7 @@ FIRST ENSURE YOU HAVE AN INTERNET CONNECTION
     sudo /home/pi/install.sh   # execute script
     # the script will reboot system once everything has complete
     
-The Raspberry Pi will now reboot. Please keep in my if you have a USB attached, it will reboot twice so please be patient. 
+The Raspberry Pi will now reboot. Please keep in my if you have a USB attached, it will reboot twice (as it is unregistered) so please be patient. 
 
 Attach a button to GPIO 17 to start video play, and use GPIO 24 to exit (you can only exit in thumbnail mode).
 
