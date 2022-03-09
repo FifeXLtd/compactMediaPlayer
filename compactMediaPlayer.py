@@ -122,6 +122,8 @@ def check_usb_status(file_type, path): # looks for certain files with directorie
    
 def play_video(path):
     print("Playing video")
+    video_call = "omxplayer -p -o local " + str(path)
+    subprocess.check_output(video_call, shell=True)
      
 def load_thumbnail(path):
     image = pygame.image.load(path).convert()
