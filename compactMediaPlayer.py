@@ -1,4 +1,3 @@
-from moviepy.editor import *
 import pygame
 import RPi.GPIO as GPIO
 import subprocess
@@ -121,28 +120,8 @@ def check_usb_status(file_type, path): # looks for certain files with directorie
     else:
         return None
    
-def check_for_audio(path):
-    global embeddedAudio
-    result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
-                             "format=nb_streams", "-of",
-                             "default=noprint_wrappers=1:nokey=1", path],
-                            stdout = subprocess.PIPE,
-                            stderr=subprocess.STDOUT)
-    no_streams = (int(result.stdout) -1)
-    if(no_streams == 1): # 1 stream = video WITHOUT audio
-        embeddedAudio = False # overwrite global
-    # anything else we can leave exactly the same
-
 def play_video(path):
-    global embeddedAudio
-    
-    clip = VideoFileClip(path).resize((screen_width, screen_height))
-    if(embeddedAudio != True):
-        audioclip = AudioFileClip(audio_path)
-        newClip = clip.set_audio(audioclip)
-        newClip.preview(fullscreen = True)
-    else:
-        clip.preview(fullscreen = True)
+    print("Playing video")
      
 def load_thumbnail(path):
     image = pygame.image.load(path).convert()
@@ -153,7 +132,6 @@ def load_thumbnail(path):
     
     
 # start of routine
-
 drive_files = check_for_usb()
 
 if(drive_files != False):
@@ -164,8 +142,7 @@ if(drive_files != False):
     if(drive_files[2] != None): # video
         audio_path = drive_files[2]   
 print(video_path, thumbnail_path, audio_path) 
- 
-check_for_audio(video_path) # determine if the video has embedded audio      
+    
 while True:
     wait_for_play = load_thumbnail(thumbnail_path)
     while(wait_for_play == True):
