@@ -7,7 +7,7 @@ echo "1/7: 'moviepy'"
 echo "2/7: 'pygame'"
 sudo pip install pygame
 echo "3/7: 'screeninfo'"
-sudo pip install screeninfo
+#sudo pip install screeninfo
 echo "4/7: RPI.GPIO"
 echo "Skipping..."
 echo "5/7: 'subprocess'"
