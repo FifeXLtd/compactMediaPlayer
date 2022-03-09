@@ -45,18 +45,10 @@ def get_revision(): # find out pi version - there are a few differences we need 
 wait_for_mounts()
 version = get_revision()
 
-if(version != 'c03112'): # not the pi 4
-    from screeninfo import get_monitors
-    for m in get_monitors():
-        print(m)
-        screen_width = m.width
-        screen_height = m.height
-
-else: # pi 4
-    screen = pygame.display.set_mode()
-    screen_width = screen.get_width()
-    screen_height = screen.get_height()
-    pygame.quit()
+screen = pygame.display.set_mode()
+screen_width = screen.get_width()
+screen_height = screen.get_height()
+pygame.quit()
 
 pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
