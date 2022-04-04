@@ -97,10 +97,10 @@ def check_usb_status(file_type, path): # looks for certain files with directorie
     if(file_type == 1): # look for video file
         path = path + "video/"
         extension = '.mp4'
-    if(file_type == 2): # look for video file
+    if(file_type == 2): # look for thumbnail file
         path = path + "thumbnail/"
         extension = '.jpg'
-    if(file_type == 3): # look for video file
+    if(file_type == 3): # look for audio file
         path = path + "audio/"
         extension = '.mp3'
     files = []
@@ -131,9 +131,9 @@ drive_files = check_for_usb()
 if(drive_files != False):
     if(drive_files[0] != None): # video
         video_path = drive_files[0]
-    if(drive_files[1] != None): # video
+    if(drive_files[1] != None): # thumbnail
         thumbnail_path = drive_files[1]
-    if(drive_files[2] != None): # video
+    if(drive_files[2] != None): # audio
         audio_path = drive_files[2]   
 print(video_path, thumbnail_path, audio_path) 
     
